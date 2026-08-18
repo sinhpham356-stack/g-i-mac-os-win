@@ -1,0 +1,32 @@
+name: Đóng gói cho macOS
+
+on:
+  workflow_dispatch: # Cho phép bạn bấm nút chạy thủ công
+
+jobs:
+  build:
+    runs-on: macos-latest # Yêu cầu GitHub cấp một máy Mac ảo
+
+    steps:
+    - name: Lấy code từ kho về máy Mac
+      uses: actions/checkout@v4
+
+    - name: Cài đặt Python trên máy Mac
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11' # Phiên bản Python
+
+    - name: Cài đặt PyInstaller
+      run: |
+        python -m pip install --upgrade pip
+        pip install pyinstaller
+
+    - name: Tiến hành nén file
+      # LƯU Ý: Thay "auto dim from image.py" bằng đúng tên file mà bạn đã upload lên GitHub
+      run: pyinstaller --onefile "auto dim from image.py"
+
+    - name: Trả kết quả (file chạy) về cho bạn tải xuống
+      uses: actions/upload-artifact@v4
+      with:
+        name: macos-app
+        path: dist/
