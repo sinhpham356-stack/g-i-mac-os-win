@@ -22,7 +22,7 @@ jobs:
         pip install pyinstaller
 
     - name: Tiến hành nén file
-      # LƯU Ý: Thay "auto dim from image.py" bằng đúng tên file mà bạn đã upload lên GitHub
+      # LƯU Ý: Thay "PSX_auto dim ratio from image.py" bằng đúng tên file mà bạn đã upload lên GitHub
       run: pyinstaller --onefile "PSX_auto dim ratio from image.py"
 
     - name: Trả kết quả (file chạy) về cho bạn tải xuống
